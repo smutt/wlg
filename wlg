@@ -23,7 +23,7 @@ if [ $IPv6 ]; then
   IPv6LL=`ifconfig |grep inet6|grep -v "inet6 2"|grep en0|grep -v ::1|grep -v temporary|awk '{print $2}'|awk -F "%" '{print $1}'`
   echo IPv6LL: $IPv6LL
   GWv6=`netstat -nr -f inet6|grep default|awk '{print $2}'|awk -F "%" '{print $1}'`
-  GWMACv6=`ndp -an|grep fe80::c2c1:c0ff:fe98:96c7|awk '{print $2}'`
+  GWMACv6=`ndp -an|grep $GWv6|awk '{print $2}'`
   echo GWv6: $GWv6 @ $GWMACv6 
   # "-->" `ping6 -c 2 $GWv6|grep "packet loss"|awk -F "," {'print $3'}`
 
